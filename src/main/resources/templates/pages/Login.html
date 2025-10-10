@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="fragments/template :: head('Login')"></head>
+
+<body class="bg-info d-flex justify-content-center align-items-center vh-100">
+    <div class="bg-white p-5 rounded-5 text-secondary" style="width: 25rem;">
+        <div class="d-flex justify-content-center">
+            <img src="/image/login-icon.svg" alt="Imagen de usuario" style="height: 7rem;">
+        </div>
+
+        <div class="text-center fs-1 fw-bold ">Login</div>
+        <div class="input-group mt-4">
+            <div class="input-group-text bg-info">
+                <img src="/image/username-icon.svg" alt="user-icon" style="height: 1rem;">
+            </div>
+            <input class="form-control" type="text" placeholder="Username">
+        </div>
+        <div class="input-group mt-2">
+            <div class="input-group-text bg-info">
+                <img src="/image/password-icon.svg" alt="user-icon" style="height: 1rem;">
+            </div>
+            <input class="form-control" type="text" placeholder="Password">
+        </div>
+
+        <button class="btn btn-info text-white mt-3 w-100">Incia Sesión</button>
+        <hr class="border border-1 border-secondary">
+        <div class=" text-center">¿No tiene cuenta? Comunícate con el administrador del sistema.</div>
+
+    </div>
+    <style>
+        :root {
+            --bs-info: #0e223e ;
+            --bs-info-rgb: 14, 34, 62 ;
+
+        }
+
+        .btn-info {
+            background-color: #0e223e ;
+            border-color: #0e223e ;
+        }
+    </style>
+</body>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+    crossorigin="anonymous"></script>
+
+</html>

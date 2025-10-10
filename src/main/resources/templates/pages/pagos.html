@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="fragments/template :: head('Conceptos de Pago')"></head>
+
+<body>
+    <div class="wrapper">
+        <!-- Aside -->
+        <div th:replace="fragments/template :: aside"></div>
+
+        <!-- Contenido principal -->
+        <div class="main">
+            <!-- Header -->
+            <div th:replace="fragments/template :: header"></div>
+
+            <!-- Main -->
+            <main class="p-3">
+                <div class="card shadow-sm">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                            <h2 class="mb-0">Conceptos de Pago</h2>
+                            <!-- Botón abrir modal -->
+                            <button class="btn btn-primary" data-bs-toggle="modal"
+                                data-bs-target="#registrarConceptoModal">
+                                Registrar Concepto
+                            </button>
+                        </div>
+
+                        <!-- Tabla -->
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-hover align-middle">
+                                <thead class="table-light">
+                                    <tr>
+                                        <th>Acciones</th>
+                                        <th>ID</th>
+                                        <th>Nombre Concepto</th>
+                                        <th>Tipo</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <button class="btn btn-sm btn-warning me-1">
+                                                <i class="lni lni-brush-2"></i>
+                                            </button>
+                                            <button class="btn btn-sm btn-danger">
+                                                <i class="lni lni-life-guard-tube-1"></i>
+                                            </button>
+                                        </td>
+                                        <td>1</td>
+                                        <td>Bono movilidad</td>
+                                        <td>Bono</td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <button class="btn btn-sm btn-warning me-1">
+                                                <i class="lni lni-brush-2"></i>
+                                            </button>
+                                            <button class="btn btn-sm btn-danger">
+                                                <i class="lni lni-life-guard-tube-1"></i>
+                                            </button>
+                                        </td>
+                                        <td>2</td>
+                                        <td>Descuento tardanza</td>
+                                        <td>Descuento</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                    </div>
+                </div>
+            </main>
+
+            <!-- Footer -->
+            <div th:replace="fragments/template :: footer"></div>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="registrarConceptoModal" tabindex="-1"
+        aria-labelledby="registrarConceptoModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-md">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title fw-bold" id="registrarConceptoModalLabel">Registrar Concepto de Pago</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="row g-3">
+                            <div class="col-md-12">
+                                <label class="form-label">Nombre Concepto</label>
+                                <input type="text" class="form-control" placeholder="Ej: Bono movilidad" required>
+                            </div>
+                            <div class="col-md-12">
+                                <label class="form-label">Tipo</label>
+                                <select class="form-select" required>
+                                    <option value="" disabled selected>Seleccione el tipo</option>
+                                    <option value="Bono">Bono</option>
+                                    <option value="Descuento">Descuento</option>
+                                </select>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="submit" class="btn btn-primary">Guardar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+<script src="/js/sidebar.js"></script>
+
+</html>

@@ -1,0 +1,11 @@
+spring:
+  application:
+    name: planillas
+  datasource:
+    url: jdbc:mysql://localhost:3306/planillas_bd?createDatabaseIfNotExist=true
+    username: root
+    password: ''
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update

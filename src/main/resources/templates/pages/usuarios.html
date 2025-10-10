@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="fragments/template :: head('Areas')"></head>
+
+<body>
+    <div class="wrapper">
+        <!-- Aside -->
+        <div th:replace="fragments/template :: aside"></div>
+
+        <!-- Contenido principal -->
+        <div class="main">
+            <!-- Header -->
+            <div th:replace="fragments/template :: header"></div>
+
+            <!-- Main diferente en cada página -->
+            <main class="p-3">
+                <div class="card shadow-sm">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                            <h2 class="mb-0">Usuarios</h2>
+                            <!-- Botón que abre el modal -->
+                            <button class="btn btn-primary" data-bs-toggle="modal"
+                                data-bs-target="#registrarUsuarioModal">
+                                Registrar
+                            </button>
+                        </div>
+
+
+
+                        <!-- Tabla -->
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-hover align-middle">
+                                <thead class="table-light">
+                                    <tr>
+                                        <th>Acciones</th>
+                                        <th>ID</th>
+                                        <th>Usuario</th>
+                                        <th>Empleado asignado</th>
+                                        <th>Rol</th>
+                                        <th>Estado</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <button class="btn btn-sm btn-warning me-1">
+                                                <i class="lni lni-brush-2"></i>
+                                            </button>
+                                            <button class="btn btn-sm btn-danger">
+                                                <i class="lni lni-life-guard-tube-1"></i>
+                                            </button>
+                                        </td>
+                                        <td>1</td>
+                                        <td>admin</td>
+                                        <td>74589632 - Juan Pérez</td>
+                                        <td>Administrador</td>
+                                        <td>Activo</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+
+                    </div>
+                </div>
+            </main>
+
+            <!-- Footer -->
+            <div th:replace="fragments/template :: footer"></div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="registrarUsuarioModal" tabindex="-1" aria-labelledby="registrarUsuarioModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title fw-bold" id="registrarUsuarioModalLabel">Registrar Areas</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="row g-3">
+                            <!-- Usuario -->
+                            <div class="col-md-6">
+                                <label class="form-label">Usuario (Username)</label>
+                                <input type="text" class="form-control" placeholder="Ingrese nombre de usuario"
+                                    required>
+                            </div>
+
+                            <!-- Contraseña -->
+                            <div class="col-md-6">
+                                <label class="form-label">Contraseña</label>
+                                <input type="password" class="form-control" placeholder="Ingrese contraseña" required>
+                            </div>
+
+                            <!-- Estado -->
+                            <div class="col-md-6">
+                                <label class="form-label">Estado</label>
+                                <select class="form-select" required>
+                                    <option value="" disabled selected>Seleccione estado</option>
+                                    <option value="1">Activo</option>
+                                    <option value="0">Inactivo</option>
+                                </select>
+                            </div>
+
+                            <!-- Empleado asignado -->
+                            <div class="col-md-6">
+                                <label class="form-label">Empleado asignado</label>
+                                <input type="text" class="form-control" placeholder="Buscar por DNI o nombre">
+                                <div class="form-text">Escriba DNI o nombre para buscar empleado</div>
+                            </div>
+
+                            <!-- Rol -->
+                            <div class="col-md-6">
+                                <label class="form-label">Rol</label>
+                                <select class="form-select" required>
+                                    <option value="" disabled selected>Seleccione rol</option>
+                                    <option value="ADMIN">Administrador</option>
+                                    <option value="OPER">Operador</option>
+                                </select>
+                            </div>
+
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="submit" class="btn btn-primary">Guardar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+    crossorigin="anonymous"></script>
+<script src="/js/sidebar.js"></script>
+
+</html>

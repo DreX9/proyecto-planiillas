@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="fragments/template :: head('Cargo')"></head>
+
+<body>
+    <div class="wrapper">
+        <!-- Aside -->
+        <div th:replace="fragments/template :: aside"></div>
+
+        <!-- Contenido principal -->
+        <div class="main">
+            <!-- Header -->
+            <div th:replace="fragments/template :: header"></div>
+
+            <!-- Main diferente en cada página -->
+            <main class="p-3">
+                <div class="card shadow-sm">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                            <h2 class="mb-0">Cargo</h2>
+                            <!-- Botón que abre el modal -->
+                            <button class="btn btn-primary" data-bs-toggle="modal"
+                                data-bs-target="#registrarUsuarioModal">
+                                Registrar
+                            </button>
+                        </div>
+
+                        
+
+                        <!-- Tabla -->
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-hover align-middle">
+                                <thead class="table-light">
+                                    <tr>
+                                        <th>Aciones</th>
+                                        <th>id</th>
+                                        <th>Nombre</th>
+                                        <th>Area relacionada</th>
+                                        
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <button class="btn btn-sm btn-warning me-1">
+                                                <i class="lni lni-brush-2"></i>
+                                            </button>
+                                            <button class="btn btn-sm btn-danger">
+                                                <i class="lni lni-life-guard-tube-1"></i>
+                                            </button>
+                                        </td>
+                                        <td>1</td>
+                                        <td>CEO</td>
+                                        <td>RR.HH</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                
+                    </div>
+                </div>
+            </main>
+
+            <!-- Footer -->
+            <div th:replace="fragments/template :: footer"></div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="registrarUsuarioModal" tabindex="-1" aria-labelledby="registrarUsuarioModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title fw-bold" id="registrarUsuarioModalLabel">Registrar Cargos</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="row g-3">
+                            <div class="col-md-12">
+                                <label class="form-label">Nombre</label>
+                                <input type="text" class="form-control" required>
+                            </div>
+                            <div class="col-md-12">
+                                <label class="form-label">Area relacionada</label>
+                                <select class="form-select" required>
+                                    <option value="" disabled selected>Seleccione el area</option>
+                                    <option value="1">RR.HH</option>
+                                    <option value="2">Seguridad</option>
+                                    <option value="3">Marketing</option>
+                                </select>
+                            </div>
+                            
+                            
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="submit" class="btn btn-primary">Guardar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+    crossorigin="anonymous"></script>
+<script src="/js/sidebar.js"></script>
+
+</html>

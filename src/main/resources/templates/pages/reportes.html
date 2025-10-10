@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="fragments/template :: head('Reportes')">
+
+
+</head>
+
+<body>
+    <div class="wrapper">
+        <!-- Aside -->
+        <div th:replace="fragments/template :: aside"></div>
+
+        <!-- Contenido principal -->
+        <div class="main">
+            <!-- Header -->
+            <div th:replace="fragments/template :: header"></div>
+
+            <!-- Main -->
+            <main class="p-3">
+                <div class="container-fluid py-4">
+                    <h2 class="mb-4 text-center">Reportes</h2>
+
+                    <div class="row">
+                        <!-- Gráfico 1: Asistencia -->
+                        <div class="col-md-6 mb-4">
+                            <div class="card shadow-sm">
+                                <div class="card-header bg-primary text-white">Asistencia mensual</div>
+                                <div class="card-body">
+                                    <canvas id="asistenciaChart"></canvas>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Gráfico 2: Faltas y tardanzas -->
+                        <div class="col-md-6 mb-4">
+                            <div class="card shadow-sm">
+                                <div class="card-header bg-danger text-white">Empleados con más faltas/tardanzas</div>
+                                <div class="card-body">
+                                    <canvas id="faltasChart"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <!-- Gráfico 3: Planillas -->
+                        <div class="col-md-6 mb-4">
+                            <div class="card shadow-sm">
+                                <div class="card-header bg-success text-white">Resumen de planillas</div>
+                                <div class="card-body">
+                                    <canvas id="planillaChart"></canvas>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Gráfico 4: Historial pagos -->
+                        <div class="col-md-6 mb-4">
+                            <div class="card shadow-sm">
+                                <div class="card-header bg-warning text-dark">Historial de pagos</div>
+                                <div class="card-body">
+                                    <canvas id="historialChart"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </main>
+
+            <!-- Footer -->
+            <div th:replace="fragments/template :: footer"></div>
+        </div>
+    </div>
+   
+</body>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js"></script>
+<script src="/js/sidebar.js"></script>
+<script>
+    // 1. Asistencia
+    new Chart(document.getElementById("asistenciaChart"), {
+        type: "bar",
+        data: {
+            labels: ["Juan", "María", "Pedro"],
+            datasets: [
+                { label: "Asistencias", data: [20, 18, 22], backgroundColor: "#0d6efd" },
+                { label: "Tardanzas", data: [3, 2, 1], backgroundColor: "#ffc107" },
+                { label: "Faltas", data: [1, 0, 2], backgroundColor: "#dc3545" }
+            ]
+        },
+        options: { responsive: true, scales: { yAxes: [{ ticks: { beginAtZero: true } }] } }
+    });
+
+    // 2. Faltas/Tardanzas
+    new Chart(document.getElementById("faltasChart"), {
+        type: "bar",
+        data: {
+            labels: ["Pedro", "Juan", "María"],
+            datasets: [{ label: "Faltas + Tardanzas", data: [5, 4, 2], backgroundColor: "#dc3545" }]
+        },
+        options: { responsive: true, scales: { yAxes: [{ ticks: { beginAtZero: true } }] } }
+    });
+
+    // 3. Planillas
+    new Chart(document.getElementById("planillaChart"), {
+        type: "pie",
+        data: {
+            labels: ["Empresa ABC", "XYZ Corp", "Tech Solutions"],
+            datasets: [{ data: [45000, 38000, 52000], backgroundColor: ["#28a745", "#17a2b8", "#ffc107"] }]
+        }
+    });
+
+    // 4. Historial pagos
+    new Chart(document.getElementById("historialChart"), {
+        type: "line",
+        data: {
+            labels: ["Mayo", "Junio", "Julio", "Agosto"],
+            datasets: [{
+                label: "Juan Pérez",
+                data: [1500, 1600, 1550, 1620],
+                borderColor: "#0d6efd",
+                fill: false
+            }]
+        },
+        options: { responsive: true }
+    });
+</script>
+
+</html>

@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="fragments/template :: head('Detalle Planilla')"></head>
+
+<body>
+    <div class="wrapper">
+        <!-- Aside -->
+        <div th:replace="fragments/template :: aside"></div>
+
+        <!-- Contenido principal -->
+        <div class="main">
+            <!-- Header -->
+            <div th:replace="fragments/template :: header"></div>
+
+            <!-- Main -->
+            <main class="p-3">
+                <div class="card shadow-sm">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                            <h2 class="mb-0">Detalle de Planilla</h2>
+                            <!-- Botón abrir modal -->
+                            <button class="btn btn-primary" data-bs-toggle="modal"
+                                data-bs-target="#registrarDetallePlanillaModal">
+                                Agregar Empleado
+                            </button>
+                        </div>
+
+                        <!-- Tabla -->
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-hover align-middle">
+                                <thead class="table-light">
+                                    <tr>
+                                        <th>Acciones</th>
+                                        <th>Empleado</th>
+                                        <th>Sueldo Base</th>
+                                        <th>Descuentos</th>
+                                        <th>Bonos</th>
+                                        <th>Total a Pagar</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <button class="btn btn-sm btn-info me-1">
+                                                <i class="bi bi-eye"></i> Resumen
+                                            </button>
+                                            <button class="btn btn-sm btn-danger">
+                                                <i class="bi bi-trash"></i>
+                                            </button>
+                                        </td>
+                                        <td>Juan Pérez</td>
+                                        <td>S/ 2500.00</td>
+                                        <td>S/ 100.00</td>
+                                        <td>S/ 200.00</td>
+                                        <td><strong>S/ 2600.00</strong></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                    </div>
+                </div>
+            </main>
+
+            <!-- Footer -->
+            <div th:replace="fragments/template :: footer"></div>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="registrarDetallePlanillaModal" tabindex="-1"
+        aria-labelledby="registrarDetallePlanillaModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title fw-bold" id="registrarDetallePlanillaModalLabel">Agregar Empleado a Planilla</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="row g-3">
+                            <div class="col-md-12">
+                                <label class="form-label">Empleado</label>
+                                <select class="form-select" required>
+                                    <option value="" disabled selected>Seleccione el empleado</option>
+                                    <option value="1">Juan Pérez</option>
+                                    <option value="2">Ana Torres</option>
+                                    <option value="3">Luis García</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">Sueldo Base</label>
+                                <input type="number" class="form-control" placeholder="0.00" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">Descuentos</label>
+                                <input type="number" class="form-control" placeholder="0.00">
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">Bonos</label>
+                                <input type="number" class="form-control" placeholder="0.00">
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">Total a Pagar</label>
+                                <input type="number" class="form-control" placeholder="0.00" readonly>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="submit" class="btn btn-primary">Guardar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+<script src="/js/sidebar.js"></script>
+
+</html>

@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="fragments/template :: head('Empresas')"></head>
+
+<body>
+    <div class="wrapper">
+        <!-- Aside -->
+        <div th:replace="fragments/template :: aside"></div>
+
+        <!-- Contenido principal -->
+        <div class="main">
+            <!-- Header -->
+            <div th:replace="fragments/template :: header"></div>
+
+            <!-- Main diferente en cada página -->
+            <main class="p-3">
+                <div class="card shadow-sm">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                            <h2 class="mb-0">Empresa</h2>
+                            <!-- Botón que abre el modal -->
+                            <button class="btn btn-primary" data-bs-toggle="modal"
+                                data-bs-target="#registrarUsuarioModal">
+                                Registrar
+                            </button>
+                        </div>
+
+                        <!-- Opciones arriba de la tabla -->
+                        <div class="d-flex justify-content-between align-items-center mb-2">
+                            <div>
+                                <label>
+                                    Mostrar
+                                    <select class="form-select d-inline-block w-auto">
+                                        <option>10</option>
+                                        <option>25</option>
+                                        <option>50</option>
+                                    </select>
+                                    registros
+                                </label>
+                            </div>
+                            <div>
+                                <label>
+                                    Buscar:
+                                    <input type="search" class="form-control d-inline-block w-auto"
+                                        placeholder="Escribe aquí...">
+                                </label>
+                            </div>
+                        </div>
+
+                        <!-- Tabla -->
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-hover align-middle">
+                                <thead class="table-light">
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Proyecto</th>
+                                        <th>RUC</th>
+                                        <th>Razón Social</th>
+                                        <th>Telefono</th>
+                                        <th>Telefono Respaldo</th>
+                                        <th>Correo</th>
+                                        <th>Direccion</th>
+                                        <th>Acciones</th>
+                                    </tr>
+                                </thead>
+                                <th:block th:each="emp:${lista}">
+                                    <tr>
+
+                                        <td th:text="${emp.id}"></td>
+                                        <td th:text="${emp.nombre}"></td>
+                                        <td th:text="${emp.ruc}"></td>
+                                        <td th:text="${emp.razonSocial}"></td>
+                                        <td th:text="${emp.telefono}"></td>
+                                        <td th:text="${emp.telefonoRespaldo}"></td>
+                                        <td th:text="${emp.correo}"></td>
+                                        <td th:text="${emp.direccion}"></td>
+                                        <td>
+                                            <a th:href="@{/empresa/edit/{id}(id=${emp.id})}"
+                                                class="btn btn-warning">Editar</a>
+                                            <form th:action="@{/empresa/delete}" method="post"
+                                                class="d-inline eliminar-form">
+                                                <input type="hidden" name="id" th:value="${emp.id}">
+                                                <button type="button"
+                                                    class="btn btn-danger btn-sm btn-eliminar">Eliminar</button>
+                                            </form>
+                                        </td>
+                                    </tr>
+                                </th:block>
+                            </table>
+                        </div>
+
+                        <!-- paginacion que se tendra -->
+                        <div class="d-flex justify-content-between align-items-center">
+                            <small>Mostrando registros del 1 al 1 de un total de 1 registros</small>
+                            <nav>
+                                <ul class="pagination pagination-sm mb-0">
+                                    <li class="page-item disabled"><a class="page-link">Anterior</a></li>
+                                    <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                                    <li class="page-item"><a class="page-link" href="#">Siguiente</a></li>
+                                </ul>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+            </main>
+
+            <!-- Footer -->
+            <div th:replace="fragments/template :: footer"></div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="registrarUsuarioModal" tabindex="-1" aria-labelledby="registrarUsuarioModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title fw-bold" id="registrarUsuarioModalLabel">Registrar Empresa</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+                </div>
+                <div class="modal-body">
+                    <form th:action="@{/empresa/save}" th:object="${empresa}" method="post">
+                        <input type="hidden" th:field="*{id}">
+                        <div class="row g-3">
+                            <div class="col-md-12">
+                                <label class="form-label">Nombre</label>
+                                <input type="text" th:field="*{nombre}" placeholder="Nombre" class="form-control">
+                                <span th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}"
+                                    style="color: red;"></span>
+                            </div>
+                            <div class="col-md-12">
+                                <label class="form-label">Ruc</label>
+                                <input type="text" th:field="*{ruc}" placeholder="RUC" class="form-control">
+                                <span th:if="${#fields.hasErrors('ruc')}" th:errors="*{ruc}" style="color: red;"></span>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">Razon Social</label>
+                                <input type="text" th:field="*{razonSocial}" placeholder="Razon Social"
+                                    class="form-control">
+                                <span th:if="${#fields.hasErrors('razonSocial')}" th:errors="*{razonSocial}"
+                                    style="color: red;"></span>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">Teléfono 1</label>
+                                <input type="number" th:field="*{telefono}" placeholder="Telefono" class="form-control">
+                                <span th:if="${#fields.hasErrors('telefono')}" th:errors="*{telefono}"
+                                    style="color: red;"></span>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">Telefono 2</label>
+                                <input type="number" th:field="*{telefonoRespaldo}" placeholder="Telefono de Respaldo"
+                                    class="form-control">
+                                <span th:if="${#fields.hasErrors('telefonoRespaldo')}" th:errors="*{telefonoRespaldo}"
+                                    style="color: red;"></span>
+                            </div>
+                            <div class="col-md-12">
+                                <label class="form-label">Correo</label>
+                                <input type="text" th:field="*{correo}" placeholder="Correo" class="form-control">
+                                <span th:if="${#fields.hasErrors('correo')}" th:errors="*{correo}"
+                                    style="color: red;"></span>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">Direccion</label>
+                                <input type="text" th:field="*{direccion}" placeholder="Dirección" class="form-control">
+                                <span th:if="${#fields.hasErrors('direccion')}" th:errors="*{direccion}"
+                                    style="color: red;"></span>
+                            </div>
+
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
+                                <button type="submit" class="btn btn-primary">Guardar</button>
+                            </div>
+
+
+
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</body>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+    crossorigin="anonymous"></script>
+<script src="/js/sidebar.js"></script>
+<script th:if="${abrirModal}">
+    const modal = new bootstrap.Modal(document.getElementById('registrarUsuarioModal'));
+    modal.show();
+</script>
+<script>
+document.querySelectorAll('.btn-eliminar').forEach(btn => {
+    btn.addEventListener('click', function() {
+        const form = this.closest('form');
+        Swal.fire({
+            title: '¿Eliminar empresa?',
+            text: "Esta acción no se puede deshacer.",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#d33',
+            cancelButtonColor: '#3085d6',
+            confirmButtonText: 'Sí, eliminar',
+            cancelButtonText: 'Cancelar'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                form.submit();
+            }
+        });
+    });
+});
+</script>
+
+</html>
