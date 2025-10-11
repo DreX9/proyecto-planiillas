@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 
-<head th:replace="fragments/template :: head('Areas')"></head>
+<head th:replace="fragments/template :: head('Cargo')"></head>
 
 <body>
     <div class="wrapper">
@@ -18,15 +18,15 @@
                 <div class="card shadow-sm">
                     <div class="card-body">
                         <div class="d-flex justify-content-between align-items-center mb-3">
-                            <h2 class="mb-0">Areas</h2>
+                            <h2 class="mb-0">Cargo</h2>
                             <!-- Botón que abre el modal -->
                             <button class="btn btn-primary" data-bs-toggle="modal"
-                                data-bs-target="#registrarAreaModal">
+                                data-bs-target="#registrarCargoModal">
                                 Registrar
                             </button>
                         </div>
 
-
+                        
 
                         <!-- Tabla -->
                         <div class="table-responsive">
@@ -35,25 +35,24 @@
                                     <tr>
                                         <th>ID</th>
                                         <th>Nombre</th>
-                                        <th>Estado</th>
-                                        <th>Empresa asociada</th>
-                                        <th>Fecha de creación</th>
+                                        <th>Sueldo Base</th>
+                                        <th>Descripción</th>
                                         <th>Acciones</th>
+                                        
                                     </tr>
                                 </thead>
-                                <th:block th:each="ar:${lista}">
+                                <th:block th:each="cg:${lista}">
                                     <tr>
-                                        <td th:text="${ar.id}"></td>
-                                        <td th:text="${ar.nombre}"></td>
-                                        <td th:text="${ar.estado}"></td>
-                                        <td th:text="${ar.empresa.nombre}"></td>
-                                        <td th:text="${ar.fechaCreacion}"></td>
+                                        <td th:text="${cg.id}"></td>
+                                        <td th:text="${cg.nombre}"></td>
+                                        <td th:text="${cg.salarioBase}"></td>
+                                        <td th:text="${cg.descripcion}"></td>
                                         <td>
-                                            <a th:href="@{/area/edit/{id}(id=${ar.id})}"
+                                            <a th:href="@{/cargo/edit/{id}(id=${cg.id})}"
                                                 class="btn btn-warning">Editar</a>
-                                            <form th:action="@{/area/delete}" method="post"
+                                            <form th:action="@{/cargo/delete}" method="post"
                                                 class="d-inline eliminar-form">
-                                                <input type="hidden" name="id" th:value="${ar.id}">
+                                                <input type="hidden" name="id" th:value="${cg.id}">
                                                 <button type="button"
                                                     class="btn btn-danger btn-sm btn-eliminar">Eliminar</button>
                                             </form>
@@ -63,7 +62,7 @@
                             </table>
                         </div>
 
-
+                
                     </div>
                 </div>
             </main>
@@ -73,47 +72,30 @@
         </div>
     </div>
 
-    <div class="modal fade" id="registrarAreaModal" tabindex="-1" aria-labelledby="registrarAreaModalLabel"
+    <div class="modal fade" id="registrarCargoModal" tabindex="-1" aria-labelledby="registrarCargoModalLabel"
         aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title fw-bold" id="registrarAreaModalLabel">Registrar Areas</h5>
+                    <h5 class="modal-title fw-bold" id="registrarCargoModalLabel">Registrar Cargos</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
                 </div>
                 <div class="modal-body">
-                    <form th:action="@{/area/save}" th:object="${area}" method="post">
+                    <form th:action="@{/cargo/save}" th:object="${cargo}" method="post">
                         <input type="hidden" th:field="*{id}">
                         <div class="row g-3">
-                            <div class="col-md-12">
+                            <div class="col-md-6">
                                 <label class="form-label">Nombre</label>
-                                <input type="text" th:field="*{nombre}" placeholder="Nombre" class="form-control">
-                                <span th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}"
-                                    style="color: red;"></span>
+                                <input type="text" th:field="*{nombre}" class="form-control"  placeholder="Nombre">
                             </div>
                             <div class="col-md-6">
-                                <label class="form-label">Empresa</label>
-                                <select th:field="*{empresa.id}">
-                                    <option value="" disabled selected>Seleccionar una empresa</option>
-                                    <option th:each="emp:${empresa}" th:value="${emp.id}" th:text="${emp.nombre}">
-                                    </option>
-                                </select>
-                            </div>
-                            <div class="col-md-6">
-                                <label class="form-label">Estado</label>
-                                <select th:field="*{estado}" class="form-select">
-                                    <option value="" disabled selected>Selecciona el estado</option>
-                                    <option th:each="est : ${T(com.jprado.planillas.area.AreaEstado).values()}"
-                                        th:value="${est}" th:text="${est}">
-                                    </option>
-                                </select>
+                                <label class="form-label">Sueldo base</label>
+                                <input type="number" th:field="*{salarioBase}" class="form-control"  placeholder="Ej 999,99">
                             </div>
                             <div class="col-md-12">
-                                <label class="form-label">Fecha Creación</label>
-                                <input type="text" th:field="*{fechaCreacion}" class="form-control">
-            
+                                <label class="form-label">Descripcion</label>
+                                <input type="text" th:field="*{descripcion}" class="form-control"  placeholder="Descripcion">
                             </div>
-                           
                         </div>
                         <div class="modal-footer">
                                 <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
@@ -132,7 +114,7 @@
 <script src="/js/sidebar.js"></script>
 <script th:if="${abrirModal}">
     document.addEventListener("DOMContentLoaded", function() {
-        const modal = new bootstrap.Modal(document.getElementById('registrarAreaModal'));
+        const modal = new bootstrap.Modal(document.getElementById('registrarCargoModal'));
         modal.show();
     });
 </script>
@@ -141,7 +123,7 @@ document.querySelectorAll('.btn-eliminar').forEach(btn => {
     btn.addEventListener('click', function() {
         const form = this.closest('form');
         Swal.fire({
-            title: '¿Eliminar empresa?',
+            title: '¿Eliminar Cargo?',
             text: "Esta acción no se puede deshacer.",
             icon: 'warning',
             showCancelButton: true,

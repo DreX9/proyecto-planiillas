@@ -3,6 +3,7 @@ package com.jprado.planillas.area;
 import java.time.LocalDate;
 
 import com.jprado.planillas.empresa.Empresa;
+import com.jprado.planillas.util.util;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -15,7 +16,6 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.PrePersist;
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -38,12 +38,14 @@ public class Area {
     @ManyToOne
     @JoinColumn(name = "id_empresa")
     private Empresa empresa;
-    @NotNull
+    //Le asigno la fecha actual para poder llamarlo en el thymeleaf con el dato completo 
     @Column(nullable = false)
-    private LocalDate fechaCreacion;
+    private LocalDate fechaCreacion = LocalDate.now();
     // Nos va a permitir que se ejecute automaticamente antes de que se inserte el registro en la base de datos 
     @PrePersist
     public void prePersist() {
-        fechaCreacion = LocalDate.now();
+        if (fechaCreacion == null) {
+            fechaCreacion = LocalDate.now();
+        }
     }
 }

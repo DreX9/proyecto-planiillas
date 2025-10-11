@@ -12,8 +12,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
-
-import com.jprado.planillas.empresa.Empresa;
 import com.jprado.planillas.empresa.EmpresaService;
 
 import jakarta.validation.Valid;
@@ -39,8 +37,10 @@ public class AreaController {
     @PostMapping("/save")
     public String addArea(@Valid @ModelAttribute Area area, BindingResult error, Model model) {
         if (error.hasErrors()) {
+            System.out.println("Errores: " + error.getAllErrors());
             model.addAttribute("lista", areaService.getAllArea());
             model.addAttribute("empresa", empresaService.getAllEmpresa());
+            model.addAttribute("abrirModal", true);
             return "pages/area";
         }
        
@@ -53,7 +53,7 @@ public class AreaController {
     public String editEmpresa(@PathVariable Long id, Model model) {
         try {
             model.addAttribute("area", areaService.getByIdArea(id));
-            model.addAttribute("empresas", empresaService.getAllEmpresa());
+            model.addAttribute("empresa", empresaService.getAllEmpresa());
             model.addAttribute("lista", areaService.getAllArea());
             model.addAttribute("abrirModal", true);
             return "pages/area";
