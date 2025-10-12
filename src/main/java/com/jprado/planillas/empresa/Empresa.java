@@ -23,7 +23,7 @@ public class Empresa {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_empresa")
+    @Column(name = "empresa_id")
     private Long id;
     @NotBlank(message = "El nombre de la empresa es un campo obligatorio")
     @Size(max = 100, message = "El nombre no puede tener más de 100 caracteres")

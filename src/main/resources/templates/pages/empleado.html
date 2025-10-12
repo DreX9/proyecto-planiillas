@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="fragments/template :: head('Empleado')"></head>
+
+<body>
+    <div class="wrapper">
+        <!-- Aside -->
+        <div th:replace="fragments/template :: aside"></div>
+
+        <!-- Contenido principal -->
+        <div class="main">
+            <!-- Header -->
+            <div th:replace="fragments/template :: header"></div>
+
+            <!-- Main diferente en cada página -->
+            <main class="p-3">
+                <div class="card shadow-sm">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                            <h2 class="mb-0">Empleados</h2>
+                            <!-- Botón que abre el modal -->
+                            <button class="btn btn-primary" data-bs-toggle="modal"
+                                data-bs-target="#registrarEmpleadoModal">
+                                Registrar
+                            </button>
+                        </div>
+                        <!-- Opciones arriba de la tabla -->
+                        <div class="d-flex justify-content-between align-items-center mb-2">
+                            <div>
+                                <label>
+                                    Mostrar
+                                    <select class="form-select d-inline-block w-auto">
+                                        <option>10</option>
+                                        <option>25</option>
+                                        <option>50</option>
+                                    </select>
+                                    registros
+                                </label>
+                            </div>
+                            <div>
+                                <label>
+                                    Buscar:
+                                    <input type="search" class="form-control d-inline-block w-auto"
+                                        placeholder="Escribe aquí...">
+                                </label>
+                            </div>
+                        </div>
+
+
+
+                        <!-- Tabla -->
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-hover align-middle">
+                                <thead class="table-light">
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>DNI</th>
+                                        <th>Nombre</th>
+                                        <th>Apellidos</th>
+                                        <th>Telefono</th>
+                                        <th>Correo</th>
+                                        <th>Direccion</th>
+                                        <th>Fecha de Contrato</th>
+                                        <th>Estado</th>
+                                        <th>Tipo de documento</th>
+                                        <th>Cargo</th>
+                                        <th>Acciones</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr th:each="emp : ${lista}">
+                                        <td th:text="${emp.id}"></td>
+                                        <td th:text="${emp.dni}"></td>
+                                        <td th:text="${emp.nombre}"></td>
+                                        <td th:text="${emp.apellido}"></td>
+                                        <td th:text="${emp.telefono}"></td>
+                                        <td th:text="${emp.correo}"></td>
+                                        <td th:text="${emp.direccion}"></td>
+                                        <td th:text="${emp.fechaContrato}"></td>
+                                        <td th:text="${emp.estado}"></td>
+                                        <td th:text="${emp.tipoDocumento}"></td>
+                                        <td th:text="${emp.cargo.nombre}"></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <!-- paginacion que se tendra -->
+                        <div class="d-flex justify-content-between align-items-center">
+                            <small>Mostrando registros del 1 al 1 de un total de 1 registros</small>
+                            <nav>
+                                <ul class="pagination pagination-sm mb-0">
+                                    <li class="page-item disabled"><a class="page-link">Anterior</a></li>
+                                    <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                                    <li class="page-item"><a class="page-link" href="#">Siguiente</a></li>
+                                </ul>
+                            </nav>
+                        </div>
+
+                    </div>
+                </div>
+            </main>
+
+            <!-- Footer -->
+            <div th:replace="fragments/template :: footer"></div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="registrarEmpleadoModal" tabindex="-1" aria-labelledby="registrarEmpleadoModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title fw-bold" id="registrarEmpleadoModalLabel">Registrar Empleados</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+                </div>
+                <div class="modal-body">
+                    <form th:action="@{/empleado/save}" th:object="${empleado}" method="post">
+                         <input type="hidden" th:field="*{id}">
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <label class="form-label">DNI</label>
+                                <input type="text" th:field="*{dni}" class="form-control" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">Nombres</label>
+                                <input type="text" th:field="*{nombre}" class="form-control" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">Apellidos</label>
+                                <input type="text" th:field="*{apellido}" class="form-control" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">Teléfono</label>
+                                <input type="text" th:field="*{telefono}" class="form-control" required>
+                            </div>
+                            <div class="col-md-12">
+                                <label class="form-label">Dirección</label>
+                                <input type="text" th:field="*{direccion}" class="form-control" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">Correo</label>
+                                <input type="email" th:field="*{correo}" class="form-control" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">Fecha de contrato</label>
+                                <input type="text" th:field="*{fechaContrato}" class="form-control" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">Estado</label>
+                                <select th:field="*{estado}" class="form-select">
+                                    <option value="" disabled selected>Selecciona el estado</option>
+                                    <option th:each="est : ${T(com.jprado.planillas.empleado.EmpleadoEstado).values()}"
+                                        th:value="${est}" th:text="${est}">
+                                    </option>
+                                </select>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">Tipo de documento</label>
+                                <select th:field="*{tipoDocumento}" class="form-select" required>
+                                    <option value="" disabled selected>Selecciona un tipo de documento</option>
+                                    <option value="DNI">Documento Nacional de Identidad</option>
+                                    <option value="PASAPORTE">Pasaporte</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">Cargo</label>
+                                <select th:field="*{cargo.id}">
+                                    <option value="" disabled selected>Seleccionar el Cargo</option>
+                                    <option th:each="cg : ${cargo}" th:value="${cg.id}" th:text="${cg.nombre}">
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
+                            <button type="submit" class="btn btn-primary">Guardar</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+    crossorigin="anonymous"></script>
+<script src="/js/sidebar.js"></script>
+<script th:if="${abrirModal}">
+    document.addEventListener("DOMContentLoaded", function () {
+        const modal = new bootstrap.Modal(document.getElementById('registrarEmpleadoModal'));
+        modal.show();
+    });
+</script>
+<script>
+    document.querySelectorAll('.btn-eliminar').forEach(btn => {
+        btn.addEventListener('click', function () {
+            const form = this.closest('form');
+            Swal.fire({
+                title: '¿Eliminar el Empleado?',
+                text: "Esta acción no se puede deshacer.",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#d33',
+                cancelButtonColor: '#3085d6',
+                confirmButtonText: 'Sí, eliminar',
+                cancelButtonText: 'Cancelar'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    form.submit();
+                }
+            });
+        });
+    });
+</script>
+
+</html>

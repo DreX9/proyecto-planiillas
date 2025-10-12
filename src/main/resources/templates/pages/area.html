@@ -20,8 +20,7 @@
                         <div class="d-flex justify-content-between align-items-center mb-3">
                             <h2 class="mb-0">Areas</h2>
                             <!-- Botón que abre el modal -->
-                            <button class="btn btn-primary" data-bs-toggle="modal"
-                                data-bs-target="#registrarAreaModal">
+                            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#registrarAreaModal">
                                 Registrar
                             </button>
                         </div>
@@ -111,14 +110,14 @@
                             <div class="col-md-12">
                                 <label class="form-label">Fecha Creación</label>
                                 <input type="text" th:field="*{fechaCreacion}" class="form-control">
-            
+
                             </div>
-                           
+
                         </div>
                         <div class="modal-footer">
-                                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
-                                <button type="submit" class="btn btn-primary">Guardar</button>
-                            </div>
+                            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
+                            <button type="submit" class="btn btn-primary">Guardar</button>
+                        </div>
                     </form>
                 </div>
             </div>
@@ -131,30 +130,31 @@
     crossorigin="anonymous"></script>
 <script src="/js/sidebar.js"></script>
 <script th:if="${abrirModal}">
-    document.addEventListener("DOMContentLoaded", function() {
+    document.addEventListener("DOMContentLoaded", function () {
         const modal = new bootstrap.Modal(document.getElementById('registrarAreaModal'));
         modal.show();
     });
 </script>
 <script>
-document.querySelectorAll('.btn-eliminar').forEach(btn => {
-    btn.addEventListener('click', function() {
-        const form = this.closest('form');
-        Swal.fire({
-            title: '¿Eliminar empresa?',
-            text: "Esta acción no se puede deshacer.",
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#d33',
-            cancelButtonColor: '#3085d6',
-            confirmButtonText: 'Sí, eliminar',
-            cancelButtonText: 'Cancelar'
-        }).then((result) => {
-            if (result.isConfirmed) {
-                form.submit();
-            }
+    document.querySelectorAll('.btn-eliminar').forEach(btn => {
+        btn.addEventListener('click', function () {
+            const form = this.closest('form');
+            Swal.fire({
+                title: '¿Eliminar empresa?',
+                text: "Esta acción no se puede deshacer.",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#d33',
+                cancelButtonColor: '#3085d6',
+                confirmButtonText: 'Sí, eliminar',
+                cancelButtonText: 'Cancelar'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    form.submit();
+                }
+            });
         });
     });
-});
 </script>
+
 </html>
