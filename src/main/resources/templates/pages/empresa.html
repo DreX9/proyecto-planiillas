@@ -77,12 +77,12 @@
                                         <td th:text="${emp.direccion}"></td>
                                         <td>
                                             <a th:href="@{/empresa/edit/{id}(id=${emp.id})}"
-                                                class="btn btn-warning">Editar</a>
+                                                class="btn btn-warning"><i class="bi bi-pencil-square"></i></a>
                                             <form th:action="@{/empresa/delete}" method="post"
                                                 class="d-inline eliminar-form">
                                                 <input type="hidden" name="id" th:value="${emp.id}">
                                                 <button type="button"
-                                                    class="btn btn-danger btn-sm btn-eliminar">Eliminar</button>
+                                                    class="btn btn-danger btn-sm btn-eliminar"><i class="bi bi-trash-fill"></i></button>
                                             </form>
                                         </td>
                                     </tr>

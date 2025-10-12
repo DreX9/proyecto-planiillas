@@ -2,6 +2,7 @@ package com.jprado.planillas.empleado;
 
 import java.time.LocalDate;
 
+import com.jprado.planillas.area.Area;
 import com.jprado.planillas.cargo.Cargo;
 
 import jakarta.persistence.Column;
@@ -69,6 +70,9 @@ public class Empleado {
     @ManyToOne
     @JoinColumn(name = "empleado_id_cargo", nullable = false)
     private Cargo cargo;
+    @ManyToOne
+    @JoinColumn(name = "id_area", nullable = false)
+    private Area area;
     @PrePersist
     public void prePersist() {
         if (fechaContrato == null) {

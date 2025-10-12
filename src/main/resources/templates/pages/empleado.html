@@ -65,6 +65,8 @@
                                         <th>Estado</th>
                                         <th>Tipo de documento</th>
                                         <th>Cargo</th>
+                                        <th>Area</th>
+                                        <th>Empresa</th>
                                         <th>Acciones</th>
                                     </tr>
                                 </thead>
@@ -81,6 +83,18 @@
                                         <td th:text="${emp.estado}"></td>
                                         <td th:text="${emp.tipoDocumento}"></td>
                                         <td th:text="${emp.cargo.nombre}"></td>
+                                        <td th:text="${emp.area.nombre}"></td>
+                                        <td th:text="${emp.area.empresa.nombre}"></td>
+                                        <td>
+                                            <a th:href="@{/empleado/edit/{id}(id=${emp.id})}" class="btn btn-warning"><i
+                                                    class="bi bi-pencil-square"></i></a>
+                                            <form th:action="@{/empleado/delete}" method="post"
+                                                class="d-inline eliminar-form">
+                                                <input type="hidden" name="id" th:value="${emp.id}">
+                                                <button type="button" class="btn btn-danger btn-sm btn-eliminar"><i
+                                                        class="bi bi-trash-fill"></i></i></button>
+                                            </form>
+                                        </td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -116,7 +130,7 @@
                 </div>
                 <div class="modal-body">
                     <form th:action="@{/empleado/save}" th:object="${empleado}" method="post">
-                         <input type="hidden" th:field="*{id}">
+                        <input type="hidden" th:field="*{id}">
                         <div class="row g-3">
                             <div class="col-md-6">
                                 <label class="form-label">DNI</label>
@@ -171,6 +185,26 @@
                                     </option>
                                 </select>
                             </div>
+                            <!-- Nuevo  -->
+                            <div class="col-md-6">
+                                <label class="form-label">Empresa</label>
+                                <select name="empresaId" class="form-select"
+                                    th:onchange="'window.location.href=\'/empleado/filtrarAreas?empresaId=\' + this.value'">
+                                    <option value="" disabled th:selected="${empresaSeleccionadaId == null}">Seleccionar
+                                        empresa</option>
+                                    <option th:each="emp : ${empresa}" th:value="${emp.id}" th:text="${emp.nombre}"
+                                        th:selected="${empresaSeleccionadaId == emp.id}"></option>
+                                </select>
+                            </div>
+
+                            <div class="col-md-6">
+                                <label class="form-label">Área</label>
+                                <select th:field="*{area.id}" class="form-select">
+                                    <option value="" disabled selected>Seleccionar área</option>
+                                    <option th:each="a : ${area}" th:value="${a.id}" th:text="${a.nombre}"></option>
+                                </select>
+                            </div>
+                            <!-- nuevo fin -->
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>

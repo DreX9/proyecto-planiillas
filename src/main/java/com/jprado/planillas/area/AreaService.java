@@ -22,4 +22,7 @@ public class AreaService {
     public void deleteArea(Long id){
          areaRepository.deleteById(id);
     }
+    public List<Area> getAreasByEmpresa(Long empresaId) {
+        return areaRepository.findByEmpresaId(empresaId);
+    }
 }

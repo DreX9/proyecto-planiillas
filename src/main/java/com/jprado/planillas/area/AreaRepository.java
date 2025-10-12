@@ -1,7 +1,10 @@
 package com.jprado.planillas.area;
 
+import java.util.List;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface AreaRepository extends JpaRepository<Area, Long>{
-    
+public interface AreaRepository extends JpaRepository<Area, Long> {
+
+    List<Area> findByEmpresaId(Long empresaId);
 }
