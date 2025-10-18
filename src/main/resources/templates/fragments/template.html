@@ -86,6 +86,14 @@
                         <span>Reportes</span>
                     </a>
                 </li>
+                <li class="sidebar-item">
+                <form th:action="@{/logout}" method="post" class="w-100">
+                    <button type="submit" class="btn btn-danger w-100 text-start px-3">
+                        <i class="fs-4 bi-box-arrow-right"></i>
+                        <span class="ms-1 d-none d-sm-inline"></span>
+                    </button>
+                </form>
+            </li>
                 <!-- <li class="sidebar-item">
                     <a href="#" class="sidebar-link has-dropdown collapsed" data-bs-toggle="collapse"
                         data-bs-target="#multi" aria-expanded="false" aria-controls="multi">
